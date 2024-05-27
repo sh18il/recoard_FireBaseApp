@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:record_project/controller/app_service_controller.dart';
 import 'package:record_project/controller/image_controlls.dart';
 import 'package:record_project/firebase_options.dart';
-import 'package:record_project/view/home_screen.dart';
+import 'package:record_project/view/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const HomeScreen(),
+        home: const Homepage(),
       ),
     );
   }

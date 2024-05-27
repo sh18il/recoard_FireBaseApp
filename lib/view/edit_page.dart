@@ -42,7 +42,7 @@ class _EditPageState extends State<EditPage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ImagesProvider>(context);
+    final provider = Provider.of<ImagesProvider>(context, listen: false);
 
     return Scaffold(
       body: Container(
@@ -57,16 +57,18 @@ class _EditPageState extends State<EditPage> {
           child: Column(
             children: [
               const Gap(20),
-              CircleAvatar(
-                backgroundColor: const Color.fromARGB(255, 211, 210, 206),
-                radius: 40,
-                backgroundImage: isNewImagePicked
-                    ? FileImage(provider.editPickedImage!)
-                    : widget.stmodel.image != null
-                        ? NetworkImage(widget.stmodel.image.toString())
-                            as ImageProvider
-                        : null,
-              ),
+              Consumer<ImagesProvider>(builder: (context, pro, _) {
+                return CircleAvatar(
+                  backgroundColor: const Color.fromARGB(255, 211, 210, 206),
+                  radius: 40,
+                  backgroundImage: isNewImagePicked
+                      ? FileImage(pro.editPickedImage!)
+                      : widget.stmodel.image != null
+                          ? NetworkImage(widget.stmodel.image.toString())
+                              as ImageProvider
+                          : null,
+                );
+              }),
               TextButton(
                 onPressed: () async {
                   await provider.editPickImg();
@@ -144,7 +146,7 @@ class _EditPageState extends State<EditPage> {
       image: imageUrl,
     );
 
-    await services.updateData(newData, widget.id);
+    await provider.updateStudent(context, newData, widget.id);
     Navigator.pop(context);
   }
 }

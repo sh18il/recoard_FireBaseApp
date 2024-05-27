@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -17,7 +18,8 @@ class AddPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<StudentController>(context, listen: false);
+    log("addScreeen");
+
     return SafeArea(
       child: PopScope(
         canPop: true,
@@ -40,19 +42,24 @@ class AddPage extends StatelessWidget {
                 child: Column(
                   children: [
                     const Gap(20),
-                    FutureBuilder(
-                      future: Future.value(
-                          Provider.of<ImagesProvider>(context).pickedImage),
-                      builder: (context, snapshot) {
-                        return CircleAvatar(
-                          backgroundColor:
-                              const Color.fromARGB(255, 125, 124, 122),
-                          radius: 40,
-                          backgroundImage: snapshot.data != null
-                              ? FileImage(snapshot.data!)
-                              : null,
+                    Consumer<ImagesProvider>(
+                      builder: (context,pro,_) {
+                        return FutureBuilder(
+                          future: Future.value(
+                            pro
+                                  .pickedImage),
+                          builder: (context, snapshot) {
+                            return CircleAvatar(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 125, 124, 122),
+                              radius: 40,
+                              backgroundImage: snapshot.data != null
+                                  ? FileImage(snapshot.data!)
+                                  : null,
+                            );
+                          },
                         );
-                      },
+                      }
                     ),
                     TextButton(
                       onPressed: () {
@@ -173,7 +180,7 @@ class AddPage extends StatelessWidget {
       image: services.url,
     );
 
-    await pro.addStudent(stModel);
+    await pro.addStudent(context, stModel);
     imageProvider.clearPickedImage();
     Navigator.pop(context);
   }

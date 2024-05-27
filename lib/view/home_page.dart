@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -9,11 +11,12 @@ import 'package:record_project/service/app_service.dart';
 import 'package:record_project/view/add_page.dart';
 import 'package:record_project/view/edit_page.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class Homepage extends StatelessWidget {
+  const Homepage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    log("home_screen");
     final provider = Provider.of<StudentController>(context, listen: false);
     return Scaffold(
       floatingActionButton: FloatingActionButton.small(
@@ -62,9 +65,10 @@ class HomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
+                                width: 100,
                                 child: Image.network(
                                   data.image.toString(),
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                 ),
                               ),
                               Column(
@@ -82,9 +86,9 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   IconButton(
                                       onPressed: () {
-                                        provider.deleteStudent(id);
-                                        AppService()
-                                            .deleteImage(data.image, context);
+                                        provider.deleteStudent(context, id);
+                                        AppService().deleteImage(
+                                            data.image.toString(), context);
                                       },
                                       icon: const Icon(Icons.delete)),
                                   IconButton(
