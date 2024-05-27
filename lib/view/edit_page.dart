@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -43,6 +44,7 @@ class _EditPageState extends State<EditPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ImagesProvider>(context, listen: false);
+    log("editScreen");
 
     return Scaffold(
       body: Container(

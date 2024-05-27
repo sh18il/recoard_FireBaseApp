@@ -8,6 +8,7 @@ import 'package:record_project/controller/image_controlls.dart';
 import 'package:record_project/model/student_model.dart';
 import 'package:record_project/service/app_service.dart';
 
+// ignore: must_be_immutable
 class AddPage extends StatelessWidget {
   AddPage({super.key});
 

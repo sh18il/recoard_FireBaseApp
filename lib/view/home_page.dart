@@ -48,6 +48,17 @@ class Homepage extends StatelessWidget {
               } else {
                 List<QueryDocumentSnapshot<StudentModel>> studentDoc =
                     snapshot.data?.docs ?? [];
+                if (studentDoc.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      "No data available",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  );
+                }
                 return ListView.builder(
                   itemCount: studentDoc.length,
                   itemBuilder: (context, index) {
@@ -64,7 +75,7 @@ class Homepage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 100,
                                 child: Image.network(
                                   data.image.toString(),

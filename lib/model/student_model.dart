@@ -5,7 +5,10 @@ class StudentModel {
   String? image;
 
   StudentModel(
-      {required this.name, required this.email, required this.address,required this.image});
+      {required this.name,
+      required this.email,
+      required this.address,
+      required this.image});
 
   StudentModel.fromJson(Map<String, dynamic> json) {
     name = json["name"];

@@ -25,23 +25,27 @@ class AppService {
     try {
       await uploadedImage.putFile(image);
       url = await uploadedImage.getDownloadURL();
-      print(url);
+    
     } catch (e) {
       _showErrorMessage(context, 'Failed to upload image: ${e.toString()}');
     }
   }
 
-  Future updateImage(String imageurl, File updateimage, BuildContext context) async {
-    try {
-      Reference editImage = FirebaseStorage.instance.refFromURL(imageurl);
-      await editImage.putFile(updateimage);
-      url = await editImage.getDownloadURL();
-    } catch (e) {
-      // ignore: use_build_context_synchronously
-      _showErrorMessage(context, 'Failed to update image: ${e.toString()}');
-    }
-  }
 
+ Future  updateImage(String imageUrl, File updateImage, BuildContext context) async {
+  try {
+    Reference editImageRef = FirebaseStorage.instance.refFromURL(imageUrl);
+    
+   await editImageRef.putFile(updateImage);
+    String newUrl = await editImageRef.getDownloadURL();
+    
+    return newUrl; 
+  } catch (e) {
+   
+    _showErrorMessage(context, 'Failed to update image: ${e.toString()}');
+    return null; 
+  }
+}
   Future<void> deleteImage(String imageurl, BuildContext context) async {
     try {
       Reference delete = FirebaseStorage.instance.refFromURL(imageurl);
@@ -55,6 +59,7 @@ class AppService {
     try {
       await studentRef.add(model);
     } catch (e) {
+     
       print('Failed to add data: ${e.toString()}');
     }
   }
