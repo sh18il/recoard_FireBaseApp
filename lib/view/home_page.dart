@@ -30,7 +30,7 @@ class Homepage extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/iPhone.jpg'),
+              image: AssetImage('assets/images/wliStZ.jpg'),
               fit: BoxFit.fill,
             ),
           ),

@@ -14,6 +14,7 @@ class EditPage extends StatefulWidget {
   const EditPage({super.key, required this.id, required this.stmodel});
 
   @override
+  // ignore: library_private_types_in_public_api
   _EditPageState createState() => _EditPageState();
 }
 
